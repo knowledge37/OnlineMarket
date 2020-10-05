@@ -23,15 +23,31 @@ namespace OnlineMarket.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+        //[HttpPost("Contact")]
+        public IActionResult Contact()
+        {
+            //if (ModelState.IsValid)
+            //{
+             
+            //}
+            //else
+            //{
+
+            //}
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {/* Name = Activity.Current?.Id ?? HttpContext.TraceIdentifier*/ });
         }
     }
 }

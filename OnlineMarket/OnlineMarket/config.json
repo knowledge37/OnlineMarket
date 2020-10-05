@@ -1,0 +1,8 @@
+{
+  "Colors": {
+    "favourite": "blue"
+  },
+  "ConnectionStrings": {
+    "NkTechSolutionsConnectionString": "server=(localdb)\\ProjectsV13;Database=NkTechSolutionsDb;Integrated security=true;MultipleActiveResultSets=true;"
+  }
+}

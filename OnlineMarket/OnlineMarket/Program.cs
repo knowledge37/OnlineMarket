@@ -18,9 +18,20 @@ namespace OnlineMarket
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                 .ConfigureAppConfiguration(SetupConfiguration)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void SetupConfiguration(HostBuilderContext ctx, IConfigurationBuilder builder)
+        {
+            //removing the default configurations
+            builder.Sources.Clear();
+
+            builder.AddJsonFile("config.json", false, true)
+                //.AddXmlFile("config.xml", true)
+                .AddEnvironmentVariables();
+        }
     }
 }

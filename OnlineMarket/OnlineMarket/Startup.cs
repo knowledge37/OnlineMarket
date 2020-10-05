@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineMarket.Data;
 
 namespace OnlineMarket
 {
     public class Startup
     {
+        private readonly IConfiguration _Configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -23,7 +26,12 @@ namespace OnlineMarket
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NkTechSolutionContext>(cfg =>
+          { cfg.UseSqlServer(_Configuration.GetConnectionString("NkTechSolutionsConnectionString"));
+                });
+
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

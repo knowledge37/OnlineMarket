@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "NK Tech Solutions";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dutch treat:@ViewBag.Title</title>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+  
+    <div id="theForm" class="col-md-9 card-body "  >
+        <div >
+            <form>
+                <div class="form-group">
+                    <label>Your Name:</label>
+
+                    <input class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+
+                    <input type="email" class="form-control"/>
+
+                </div>
+                <div class="form-group">
+                    <label>Subject:</label>
+
+                    <input type="text" class="form-control"/>
+
+                </div>
+                <div class="form-group">
+                    <label>Message:</label>
+                    <textarea rows="4" class="form-control"> </textarea>
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-envelope "></i><input type="submit" value="Send message" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/index.js"></script>
+</body>
+</html>
