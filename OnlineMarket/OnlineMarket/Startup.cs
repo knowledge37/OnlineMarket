@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using OnlineMarket.Data;
 
+
 namespace OnlineMarket
 {
     public class Startup
@@ -21,6 +22,7 @@ namespace OnlineMarket
         {
             _Configuration = configuration;
         }
+        
 
         public IConfiguration Configuration { get; }
 
@@ -36,8 +38,16 @@ namespace OnlineMarket
             services.AddTransient<NkTechSolutionSeeder>();
             services.AddScoped<INkTechSolutionRepository, NkTechSolutionRepository>();
 
-            services.AddMvc()
-                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            //services.AddMvc()
+            //  .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+          
+            //aint sure if this will worrk
+            services.AddControllersWithViews().
+              AddJsonOptions(options =>
+              {
+                  options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                  options.JsonSerializerOptions.PropertyNamingPolicy = null;
+              });
         }
       
 
