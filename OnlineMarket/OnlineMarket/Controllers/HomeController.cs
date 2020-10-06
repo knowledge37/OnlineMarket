@@ -14,14 +14,17 @@ namespace OnlineMarket.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly NkTechSolutionContext _context;
-        public HomeController(ILogger<HomeController> logger, NkTechSolutionContext context)
+        private readonly NkTechSolutionContext _ctx;
+        public HomeController(ILogger<HomeController> logger, NkTechSolutionContext ctx, NkTechSolutionContext context)
         {
             _logger = logger;
             _context = context;
+            _ctx = ctx;
         }
 
         public IActionResult Index()
         {
+            var result = _ctx.Products.ToList();
             return View();
         }
 
