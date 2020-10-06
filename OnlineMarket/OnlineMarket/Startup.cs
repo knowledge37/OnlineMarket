@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using OnlineMarket.Data;
 
 namespace OnlineMarket
@@ -26,14 +27,19 @@ namespace OnlineMarket
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<NkTechSolutionSeeder>();
+            
             services.AddDbContext<NkTechSolutionContext>(cfg =>
           { cfg.UseSqlServer(_Configuration.GetConnectionString("NkTechSolutionsConnectionString"));
                 });
 
             services.AddControllersWithViews();
+            services.AddTransient<NkTechSolutionSeeder>();
+            services.AddScoped<INkTechSolutionRepository, NkTechSolutionRepository>();
 
+            services.AddMvc()
+                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
+      
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

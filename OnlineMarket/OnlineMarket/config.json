@@ -4,5 +4,12 @@
   },
   "ConnectionStrings": {
     "NkTechSolutionsConnectionString": "server=(localdb)\\ProjectsV13;Database=NkTechSolutionsDb;Integrated security=true;MultipleActiveResultSets=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "warning"
+    }
+     
   }
 }

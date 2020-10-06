@@ -13,12 +13,12 @@ namespace OnlineMarket.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly NkTechSolutionContext _context;
+        private readonly INkTechSolutionRepository _repository;
         private readonly NkTechSolutionContext _ctx;
-        public HomeController(ILogger<HomeController> logger, NkTechSolutionContext ctx, NkTechSolutionContext context)
+        public HomeController(ILogger<HomeController> logger, NkTechSolutionContext ctx, INkTechSolutionRepository repository)
         {
             _logger = logger;
-            _context = context;
+            _repository = repository;
             _ctx = ctx;
         }
 
@@ -51,10 +51,11 @@ namespace OnlineMarket.Controllers
         }
         public IActionResult Shop()
         {
-            var result = from p in _context.Products
-                         orderby p.Category
-                         select p;
-            return View(result.ToList());
+            //var result = from p in _context.Products
+            //             orderby p.Category
+            //             select p;
+            var result = _repository.GetAllProducts();
+            return View(result);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
