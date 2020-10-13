@@ -7,7 +7,10 @@ namespace OnlineMarket.Data
     {
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetAllProductsByCategory(string category);
-        bool SaveChanges();
         IEnumerable<Order> GetAllOrders();
+        Order GetOrderById(int id);
+        bool SaveChanges();
+  
+      
     }
 }

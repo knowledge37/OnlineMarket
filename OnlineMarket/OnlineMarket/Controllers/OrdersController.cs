@@ -25,7 +25,7 @@ namespace OnlineMarket.Controllers
         {
             try
             {
-                return Ok( _repository.GetAllOrders());
+                return Ok(_repository.GetAllOrders());
             }
             catch (Exception ex)
             {
@@ -34,5 +34,28 @@ namespace OnlineMarket.Controllers
                 return BadRequest("failed to get all orders");
             }
         }
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var order = _repository.GetOrderById(id);
+                if (order != null)
+                {
+                    return Ok(order);
+                }else
+                {
+                    return NotFound();
+                }
+              
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"failed to get all orders{ex}");
+                return BadRequest("failed to get all orders");
+            }
+        }
+
     }
 }
