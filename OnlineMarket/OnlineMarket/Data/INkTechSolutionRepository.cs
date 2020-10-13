@@ -10,7 +10,7 @@ namespace OnlineMarket.Data
         IEnumerable<Order> GetAllOrders();
         Order GetOrderById(int id);
         bool SaveChanges();
-  
-      
+        void AddEntity(object model);
+        bool SaveAll();
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineMarket.Data;
+using OnlineMarket.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +36,8 @@ namespace OnlineMarket.Controllers
                 return BadRequest("failed to get all orders");
             }
         }
+
+
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
@@ -55,6 +59,51 @@ namespace OnlineMarket.Controllers
                 _logger.LogError($"failed to get all orders{ex}");
                 return BadRequest("failed to get all orders");
             }
+        }
+        [HttpPost]
+        public IActionResult Post([FromBody]OrderViewModel model)
+        {
+            //add it to the db
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var newOrder = new Order()
+                    {
+                        OrderDate = model.OrderDate,
+                         OrderNumber=model.OrderNumber,
+                         Id= model.OrderId
+                    };
+
+                    if (newOrder.OrderDate == DateTime.MinValue)
+                    {
+                        newOrder.OrderDate = DateTime.Now;
+                    }
+
+                    _repository.AddEntity(newOrder);
+                    if (_repository.SaveAll())
+                    {
+                        var vm = new OrderViewModel()
+                        {
+                            OrderId = newOrder.Id,
+                            OrderDate = newOrder.OrderDate,
+                            OrderNumber = newOrder.OrderNumber
+                        };
+                        return Created($"/api/orders/[{vm.OrderId}", vm);
+                    }
+                }else
+                {
+                    return BadRequest(ModelState);
+                }
+                
+               
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"failed to get new orders{ex}");
+            }
+            return BadRequest("failed to save new order");
         }
 
     }
