@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineMarket.Data;
@@ -49,6 +50,7 @@ namespace OnlineMarket.Controllers
         {
             return View();
         }
+        [Authorize]
         public IActionResult Shop()
         {
             //var result = from p in _context.Products

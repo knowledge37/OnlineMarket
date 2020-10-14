@@ -7,10 +7,11 @@ namespace OnlineMarket.Data
     {
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetAllProductsByCategory(string category);
-        IEnumerable<Order> GetAllOrders();
+        IEnumerable<Order> GetAllOrders( bool includeItems);
         Order GetOrderById(int id);
         bool SaveChanges();
         void AddEntity(object model);
         bool SaveAll();
+        IEnumerable<Order> GetAllOrders();
     }
 }

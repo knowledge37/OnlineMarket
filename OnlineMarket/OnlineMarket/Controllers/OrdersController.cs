@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,17 +18,20 @@ namespace OnlineMarket.Controllers
     {
         public readonly INkTechSolutionRepository _repository;
         public readonly ILogger<OrdersController> _logger;
-       public OrdersController(INkTechSolutionRepository repository,ILogger<OrdersController> logger)
+        public readonly IMapper _mapper;
+       public OrdersController(INkTechSolutionRepository repository,ILogger<OrdersController> logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(bool includeItems=true)
         {
             try
             {
-                return Ok(_repository.GetAllOrders());
+                var result = _repository.GetAllOrders(includeItems);
+                return Ok(_mapper.Map<IEnumerable<Order> , IEnumerable<OrderViewModel>>(result));
             }
             catch (Exception ex)
             {
@@ -46,7 +50,7 @@ namespace OnlineMarket.Controllers
                 var order = _repository.GetOrderById(id);
                 if (order != null)
                 {
-                    return Ok(order);
+                    return Ok(_mapper.Map<Order,OrderViewModel>(order));
                 }else
                 {
                     return NotFound();

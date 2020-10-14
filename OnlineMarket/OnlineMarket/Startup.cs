@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,6 +42,7 @@ namespace OnlineMarket
             services.AddTransient<NkTechSolutionSeeder>();
             services.AddScoped<INkTechSolutionRepository, NkTechSolutionRepository>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //services.AddMvc()
