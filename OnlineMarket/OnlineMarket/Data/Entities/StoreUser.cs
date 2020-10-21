@@ -8,7 +8,7 @@ namespace OnlineMarket.Data.Entities
 {
     public class StoreUser : IdentityUser
     {
-        public int FirstName { get; set; }
-        public int Lastname { get; set; }
+        public string FirstName { get; set; }
+        public string Lastname { get; set; }
     }
 }

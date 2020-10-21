@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using OnlineMarket.Data;
-
+using OnlineMarket.Data.Entities;
 
 namespace OnlineMarket
 {
@@ -33,6 +34,12 @@ namespace OnlineMarket
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+            {
+
+                cfg.User.RequireUniqueEmail = true;
+
+            }).AddEntityFrameworkStores<NkTechSolutionContext>();
             
             services.AddDbContext<NkTechSolutionContext>(cfg =>
           { cfg.UseSqlServer(_Configuration.GetConnectionString("NkTechSolutionsConnectionString"));
@@ -78,11 +85,13 @@ namespace OnlineMarket
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

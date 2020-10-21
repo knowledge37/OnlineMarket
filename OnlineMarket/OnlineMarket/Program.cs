@@ -28,7 +28,7 @@ namespace OnlineMarket
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<NkTechSolutionSeeder>();
-                seeder.Seed();
+                seeder.SeedAsync().Wait();
             }
         }
 
