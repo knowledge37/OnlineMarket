@@ -45,8 +45,8 @@ namespace OnlineMarket
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //services.AddMvc()
-            //    .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddMvc()
+            .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             ////aint sure if this will worrk
             services.AddControllersWithViews().

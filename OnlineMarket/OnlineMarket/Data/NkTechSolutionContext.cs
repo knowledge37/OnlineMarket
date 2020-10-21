@@ -1,5 +1,7 @@
 ﻿using DutchTreat.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.Data
 {
-    public class NkTechSolutionContext : DbContext
+    public class NkTechSolutionContext : IdentityDbContext<StoreUser>
     {
         public NkTechSolutionContext( DbContextOptions<NkTechSolutionContext>options): base(options)
         {

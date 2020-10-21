@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineMarket.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace DutchTreat.Data.Entities
     public DateTime OrderDate { get; set; }
     public string OrderNumber { get; set; }
     public ICollection<OrderItem> Items { get; set; }
-  }
+    public StoreUser User { get; set; }
+    }
 }
